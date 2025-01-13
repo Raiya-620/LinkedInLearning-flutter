@@ -1,30 +1,61 @@
 import 'package:flutter/material.dart';
 
 class ChatInput extends StatelessWidget {
-  const ChatInput({super.key});
+  ChatInput({super.key});
+
+  final chatInput = TextEditingController();
+
+  void onSendClicked(){
+    print('chat input value: ${chatInput.text}');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return           Container(
-              padding: EdgeInsets.all(10),
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(20),
+    return Container(
+      padding: EdgeInsets.all(10),
+      height: 50,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: (){},
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+          Expanded(
+            child: TextField(
+              textCapitalization: TextCapitalization.sentences,
+              maxLines: 5,
+              minLines: 1,
+              keyboardType: TextInputType.multiline,
+              controller: chatInput,
+              style: TextStyle(
+                color: Colors.white,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                  Icon(
-                    Icons.send,
-                    color: Colors.white,
-                  )
-                ],
+              decoration: InputDecoration(
+                hintText: 'Enter your message',
+                border: InputBorder.none,
               ),
-            );
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              onSendClicked();
+            },
+            icon: Icon(
+              Icons.send,
+              color: Colors.white,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
