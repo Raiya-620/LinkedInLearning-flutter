@@ -1,9 +1,12 @@
 import 'package:chat_app/chat_page.dart';
 import 'package:chat_app/login_page.dart';
-// import 'package:chat_app/login_page.dart';
 import 'package:flutter/material.dart';
 
-void main(){runApp(ChatApp(),);}
+void main() {
+  runApp(
+    ChatApp(),
+  );
+}
 
 class ChatApp extends StatelessWidget {
   const ChatApp({super.key});
@@ -12,10 +15,12 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Chat App!!!',
-      theme: ThemeData(primarySwatch: Colors.blue,),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       debugShowCheckedModeBanner: false,
-      home:LoginPage(),
-      );
+      home: LoginPage(),
+      routes: {'/chat':(context)=> ChatPage()},
+    );
   }
 }
-

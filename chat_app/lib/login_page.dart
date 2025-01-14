@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
-  final userEmailController = TextEditingController();
+  final userNameController = TextEditingController();
   final userPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  void onLoginButtonPressed(){
+  void onLoginButtonPressed(context){
     if(_formKey.currentState!= null && _formKey.currentState!.validate()){
-      print(userEmailController.text);
+      print(userNameController.text);
       print(userPasswordController.text);
       print('Login successful');
+//  Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatPage(username: userNameController.text,)));
+ Navigator.pushReplacementNamed(context, '/chat', arguments: '${userNameController.text}');
+    
     }else{
       print('Login unsuccessful');
     }
@@ -18,6 +21,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Center(
         child: Padding(
@@ -65,17 +69,17 @@ class LoginPage extends StatelessWidget {
                         if (value != null &&
                             value.isNotEmpty &&
                             value.length < 5) {
-                          return 'Email address should be greater than 5';
+                          return 'Username should be greater than 5 words';
                         } else if (value != null && value.isEmpty) {
-                          return 'please enter your email';
+                          return 'please enter your user name';
                         } else {
                           return null;
                         }
                       },
-                      controller: userEmailController,
+                      controller: userNameController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Enter your email',
+                        hintText: 'Enter your username',
                       ),
                     ),
                   ],
@@ -101,7 +105,7 @@ class LoginPage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(),
                       backgroundColor: Colors.deepPurple),
-                  onPressed: () {onLoginButtonPressed();},
+                  onPressed: () {onLoginButtonPressed(context);},
                   child: Text(
                     'Login',
                     style: TextStyle(color: Colors.white),

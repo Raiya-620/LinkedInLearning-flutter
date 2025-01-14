@@ -7,12 +7,15 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final username = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hi Suraiya'),
+        title: Text('Hi $username!'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/');
+            },
             icon: Icon(Icons.logout),
           ),
         ],
@@ -21,14 +24,16 @@ class ChatPage extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return ChatBubble(
-                      alignment: index % 2 == 0
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      message: 'This is Suraiya');
-                }),
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ChatBubble(
+                  alignment: index % 2 == 0
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  message: 'This is Suraiya',
+                );
+              },
+            ),
           ),
           ChatInput(),
         ],
